@@ -143,7 +143,9 @@
         "seeking": "I am looking for jobs",
         "hiring": "I am recruiting",
         "hire": "/hire",
-        "earn": "/earn"
+        "earn": "/earn",
+        "view": "View Profile",
+        "edit": "Edit Profile"
       },
       "nav_title": {
         "jobs_list": "Job List",

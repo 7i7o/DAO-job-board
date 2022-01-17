@@ -22,8 +22,6 @@ import { useAuth } from '@/hooks/useAuth';
 
 import { HamburgerIcon } from '@chakra-ui/icons';
 
-import { ChevronDown, ChevronUp } from 'tabler-icons-react';
-
 function Navbar({ sidebar, setUserPurpose }: any) {
   const router = useRouter();
   const { setUser } = useAuth();
@@ -56,11 +54,15 @@ function Navbar({ sidebar, setUserPurpose }: any) {
 
   const { t } = useTranslation('common');
 
-  const [isOpen, setIsOpen] = useState(false);
   const handlePurposeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const route = e.target.value == '/earn' ? 'jobs' : 'developers';
     setUserPurpose(e.target.value);
     router.push(route);
+  };
+
+  const changeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    e.preventDefault();
+    router.push(e.target.value);
   };
 
   return (
@@ -110,6 +112,7 @@ function Navbar({ sidebar, setUserPurpose }: any) {
              * @todo Add icon to select options.
              * @todo Update/remove route redirect from option onchange event as agreed upon
              * @todo Add onClick for profile settings and settings
+             * @todo Pass correct developers route to view profile value
              */
             <HStack
               align="center"
@@ -141,19 +144,18 @@ function Navbar({ sidebar, setUserPurpose }: any) {
               <Divider orientation="vertical" />
               <HStack align="center" color="neutral.400" h="full" px={3}>
                 <Avatar mx="2" size="sm" src="/DevDAO.png" cursor="pointer" />
-                <Text
-                  whiteSpace="nowrap"
-                  overflow="hidden"
-                  textOverflow="ellipsis"
-                  d={{ sm: 'none', md: 'unset' }}
-                >
+                <Text>
                   {account.slice(0, 4)}...{account.slice(account.length - 4)}
                 </Text>
-                {isOpen ? (
-                  <ChevronUp onClick={() => setIsOpen(!isOpen)} />
-                ) : (
-                  <ChevronDown onClick={() => setIsOpen(!isOpen)} />
-                )}
+                <Select onChange={changeHandler} border="none" w="10">
+                  <option></option>
+                  <option value={`developers/${account}`}>
+                    {t('components.navigation.navbar.view')}
+                  </option>
+                  <option value="create-profile">
+                    {t('components.navigation.navbar.edit')}
+                  </option>
+                </Select>
               </HStack>
             </HStack>
           ) : (
