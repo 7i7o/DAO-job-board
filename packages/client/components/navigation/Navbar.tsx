@@ -22,7 +22,7 @@ import { useAuth } from '@/hooks/useAuth';
 
 import { HamburgerIcon } from '@chakra-ui/icons';
 
-import { Settings, ChevronDown, ChevronUp } from 'tabler-icons-react';
+import { ChevronDown, ChevronUp } from 'tabler-icons-react';
 
 function Navbar({ sidebar, setUserPurpose }: any) {
   const router = useRouter();
@@ -155,10 +155,6 @@ function Navbar({ sidebar, setUserPurpose }: any) {
                   <ChevronDown onClick={() => setIsOpen(!isOpen)} />
                 )}
               </HStack>
-              <Divider orientation="vertical" d={{ sm: 'none', md: 'unset' }} />
-              <Box px={3} d={{ sm: 'none', md: 'unset' }}>
-                <Settings size={24} />
-              </Box>
             </HStack>
           ) : (
             <ConnectButton />
